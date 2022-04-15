@@ -24,10 +24,17 @@ export default class extends Controller {
         type: 'POST',
         dataType: 'json',
         success: (response) => {
-          console.log(response)
+          if (response.status === 'ok') {
+            let item_count = response.items || 0
+            let event = new CustomEvent('addToCart', { detail: { item_count } })
+            document.dispatchEvent(event)
+          }
         },
         error: (err) => {
           console.log(err)
+        },
+        complete: () => {
+          this.addToCartButtonTarget.classList.remove('is-loading')
         },
       })
     }
