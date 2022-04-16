@@ -1,6 +1,15 @@
 <section class="section">
-  <h1 class="title">購物車</h1>
+  <h1 class="title">購物車
 
+    <%= link_to cart_path, class:'is-size-5', method: :delete, data: {confirm: '確定清空購物車？'} do %>
+    <i class="fa-solid fa-trash"></i>
+    <span>清空購物車</span>
+    <% end %>
+  </h1>
+
+  <% if current_cart.empty? %>
+    <span>目前購物車是空的!</span>
+  <% else %>
   <table class="table is-fullwidth">
     <thead>
       <tr>
@@ -27,4 +36,7 @@
       </tr>
     </tfoot>
   </table>
+  <%= link_to '繼續選購', root_path, class: 'button is-medium' %>
+  <%= link_to '結帳', root_path, class: 'button is-danger is-medium' %>
+  <% end %>
 </section>
